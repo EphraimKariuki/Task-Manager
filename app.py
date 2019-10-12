@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLalchemy
+from DateTime import DateTime
 
 app = Flask(__name__)
 
@@ -13,6 +14,12 @@ class todo(db.model)
     content = db.column(db.string(200), nullable=flase)
     completed = db.column(db.integer, defult=0)
     date_created = db.column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Task %r>' % self.id
+        
+
+
 
 @app.route('/')
 def index():
